@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 
+	handlers "github.com/Alleyezonmee/EmpFis/handlers"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
@@ -26,6 +27,11 @@ func main() {
 		MaxAge:           300,
 	}))
 
+	// ------- SETTING ROUTES AND HANDLERS --------
+
+	router.Get("/healthZ", handlers.HandlerReadiness)
+
+	// ------ STARTING SERVER ---------
 	srv := &http.Server{
 		Handler: router,
 		Addr:    ":" + portString,
